@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import DashBoardPage from './pages/DashBoard/DashBoardPage';
 import HomePage from './pages/Home/HomePage';
 
