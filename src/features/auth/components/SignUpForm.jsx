@@ -1,15 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema } from '../schemas';
-import {
-  Field,
-  FieldGroup,
-  FieldLabel,
-  FieldError,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+import { Field, FieldGroup } from '@/components/ui/field';
 import { Button } from '@/components/ui/button';
 import AuthCard from './AuthCard';
+import FormField from '@/features/auth/components/FormField';
 
 const SignUpForm = () => {
   const {
@@ -43,48 +38,10 @@ const SignUpForm = () => {
         className="flex flex-col gap-4 w-full"
       >
         <FieldGroup>
-          <Field>
-            <FieldLabel htmlFor="name">이름</FieldLabel>
-            <Input
-              id="name"
-              {...register('name')}
-              aria-invalid={errors.name ? 'true' : 'false'}
-            />
-            {errors.name && <FieldError errors={[errors.name]} />}
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="email">이메일</FieldLabel>
-            <Input
-              id="email"
-              {...register('email')}
-              type="email"
-              placeholder="example@example.com"
-              aria-invalid={errors.email ? 'true' : 'false'}
-            />
-            {errors.email && <FieldError errors={[errors.email]} />}
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="password">비밀번호</FieldLabel>
-            <Input
-              id="password"
-              {...register('password')}
-              type="password"
-              aria-invalid={errors.password ? 'true' : 'false'}
-            />
-            {errors.password && <FieldError errors={[errors.password]} />}
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="passwordConfirm">비밀번호 재확인</FieldLabel>
-            <Input
-              id="passwordConfirm"
-              {...register('passwordConfirm')}
-              type="password"
-              aria-invalid={errors.passwordConfirm ? 'true' : 'false'}
-            />
-            {errors.passwordConfirm && (
-              <FieldError errors={[errors.passwordConfirm]} />
-            )}
-          </Field>
+          <FormField id="name" error={errors.name} />
+          <FormField id="email" error={errors.email} />
+          <FormField id="password" error={errors.password} />
+          <FormField id="passwordConfirm" error={errors.passwordConfirm} />
         </FieldGroup>
       </form>
     </AuthCard>
