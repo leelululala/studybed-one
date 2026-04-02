@@ -1,7 +1,11 @@
 import SignUpForm from '@/features/auth/components/SignUpForm';
 
 const SignUpPage = () => {
-  return <SignUpForm />;
+  return (
+    <div className="min-h-screen flex items-center justify-center m-2">
+      <SignUpForm />
+    </div>
+  );
 };
 
 export default SignUpPage;
