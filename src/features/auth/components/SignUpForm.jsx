@@ -38,10 +38,30 @@ const SignUpForm = () => {
         className="flex flex-col gap-4 w-full"
       >
         <FieldGroup>
-          <FormField id="name" error={errors.name} />
-          <FormField id="email" error={errors.email} />
-          <FormField id="password" error={errors.password} />
-          <FormField id="passwordConfirm" error={errors.passwordConfirm} />
+          <FormField
+            id="name"
+            fieldLabel="이름"
+            register={register}
+            error={errors.name}
+          />
+          <FormField
+            id="email"
+            fieldLabel="이메일"
+            register={register}
+            error={errors.email}
+          />
+          <FormField
+            id="password"
+            fieldLabel="비밀번호"
+            register={register}
+            error={errors.password}
+          />
+          <FormField
+            id="passwordConfirm"
+            fieldLabel="비밀번호 재확인"
+            register={register}
+            error={errors.passwordConfirm}
+          />
         </FieldGroup>
       </form>
     </AuthCard>
