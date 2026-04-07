@@ -5,6 +5,7 @@ import { Field, FieldGroup } from '@/components/ui/field';
 import { Button } from '@/components/ui/button';
 import AuthCard from './AuthCard';
 import FormField from '@/features/auth/components/FormField';
+import ApiUtils from '@/utils/ApiUtils';
 
 const SignUpForm = () => {
   const {
@@ -15,6 +16,7 @@ const SignUpForm = () => {
 
   const onSubmit = (data) => {
     console.log('[signup form] 서버로 보낼 데이터:', data);
+    ApiUtils.sendPost('/signup', data);
   };
 
   return (
