@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signUpSchema } from '../schemas';
+import { signUpSchema } from '../authSchema';
 import { Field, FieldGroup } from '@/components/ui/field';
 import { Button } from '@/components/ui/button';
 import AuthCard from './AuthCard';
 import FormField from '@/features/auth/components/FormField';
-import ApiUtils from '@/utils/ApiUtils';
+import { useSignUp } from '../useAuth';
 
 const SignUpForm = () => {
+  const { mutate: signUp, isPending } = useSignUp();
   const {
     register,
     handleSubmit,
@@ -16,7 +17,7 @@ const SignUpForm = () => {
 
   const onSubmit = (data) => {
     console.log('[signup form] 서버로 보낼 데이터:', data);
-    ApiUtils.sendPost('/signup', data);
+    signUp(data);
   };
 
   return (
@@ -28,7 +29,7 @@ const SignUpForm = () => {
           <Button type="button" variant="outline">
             취소
           </Button>
-          <Button type="submit" form="form-signup">
+          <Button type="submit" form="form-signup" disabled={isPending}>
             회원가입
           </Button>
         </Field>
@@ -57,12 +58,14 @@ const SignUpForm = () => {
             fieldLabel="비밀번호"
             register={register}
             error={errors.password}
+            isPassword={true}
           />
           <FormField
             id="passwordConfirm"
             fieldLabel="비밀번호 재확인"
             register={register}
             error={errors.passwordConfirm}
+            isPassword={true}
           />
         </FieldGroup>
       </form>
