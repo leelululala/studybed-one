@@ -15,6 +15,8 @@ export const signUpSchema = z
       .regex(/[A-Z]/, '대문자를 포함해야 합니다')
       .regex(/[0-9]/, '숫자를 포함해야 합니다'),
     passwordConfirm: z.string(),
+    isTwoFa: z.boolean().default(false),
+    isFido: z.boolean().default(false),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: '비밀번호가 일치하지 않습니다.',
