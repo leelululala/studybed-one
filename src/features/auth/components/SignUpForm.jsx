@@ -1,11 +1,12 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signUpSchema } from '../authSchema';
-import { Field, FieldGroup } from '@/components/ui/field';
+import { signUpSchema } from '../schemas/authSchema';
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import AuthCard from './AuthCard';
 import FormField from '@/features/auth/components/FormField';
-import { useSignUp } from '../useAuth';
+import { useSignUp } from '../hooks/useAuth';
 
 const SignUpForm = () => {
   const { mutate: signUp, isPending } = useSignUp();
@@ -13,7 +14,12 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(signUpSchema), mode: 'onBlur' });
+    control,
+  } = useForm({
+    resolver: zodResolver(signUpSchema),
+    mode: 'onBlur',
+    defaultValues: { isTwoFa: false, isFido: false },
+  });
 
   const onSubmit = (data) => {
     console.log('[signup form] 서버로 보낼 데이터:', data);
@@ -67,6 +73,34 @@ const SignUpForm = () => {
             error={errors.passwordConfirm}
             isPassword={true}
           />
+          <Field orientation="horizontal">
+            <FieldLabel htmlFor="isTwoFa">MFA 인증 여부</FieldLabel>
+            <Controller
+              name="isTwoFa"
+              control={control}
+              render={({ field }) => (
+                <Switch
+                  id="isTwoFa"
+                  checked={field.value}
+                  onCheckedChange={field.onChange} // ← d 추가
+                />
+              )}
+            />
+          </Field>
+          <Field orientation="horizontal">
+            <FieldLabel htmlFor="isFido">생체인증 사용 여부</FieldLabel>
+            <Controller
+              name="isFido" 
+              control={control}
+              render={({ field }) => (
+                <Switch
+                  id="isFido"
+                  checked={field.value}
+                  onCheckedChange={field.onChange} 
+                />
+              )}
+            />
+          </Field>
         </FieldGroup>
       </form>
     </AuthCard>

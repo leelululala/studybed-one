@@ -3,12 +3,8 @@ import BlockList from '@/features/block/components/BlockList';
 import WorkspaceCreateDialog from '@/features/workspace/components/WorkspaceCreateDialog';
 import { useNavigate } from 'react-router-dom';
 import PageInfoJson from '@/routes/PageInfo.json';
-const blocks = [
-  { id: '1', content: '블록1', type: 'page' },
-  { id: '2', content: '블록2', type: 'page' },
-  { id: '3', content: '블록3', type: 'page' },
-];
-const MainPage = () => {
+
+const Test = () => {
   const navigate = useNavigate();
   const allPages =
     PageInfoJson['container']?.flatMap((item) => item?.urlList) ?? [];
@@ -24,9 +20,7 @@ const MainPage = () => {
           {item.name}
         </Button>
       ))}
-      <WorkspaceCreateDialog />
-      <BlockList blocks={blocks} />
     </div>
   );
 };
-export default MainPage;
+export default Test;

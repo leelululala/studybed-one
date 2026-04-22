@@ -1,0 +1,14 @@
+{
+  "container": [
+    {
+      "name": "Main",
+      "urlList": [{ "url": "/", "id": "MainPage", "name": "메인 화면" }]
+    },
+    {
+      "name": "Auth",
+      "urlList": [
+        { "url": "/signup", "id": "SignUpPage", "name": "로그인 화면" }
+      ]
+    }
+  ]
+}
