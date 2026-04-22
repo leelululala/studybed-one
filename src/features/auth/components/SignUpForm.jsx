@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema } from '../schemas/authSchema';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
@@ -75,11 +75,31 @@ const SignUpForm = () => {
           />
           <Field orientation="horizontal">
             <FieldLabel htmlFor="isTwoFa">MFA 인증 여부</FieldLabel>
-            <Switch id="isTwoFa" {...register('isTwoFa')} />
+            <Controller
+              name="isTwoFa"
+              control={control}
+              render={({ field }) => (
+                <Switch
+                  id="isTwoFa"
+                  checked={field.value}
+                  onCheckedChange={field.onChange} // ← d 추가
+                />
+              )}
+            />
           </Field>
           <Field orientation="horizontal">
             <FieldLabel htmlFor="isFido">생체인증 사용 여부</FieldLabel>
-            <Switch id="isFido" {...register('isFido')} />
+            <Controller
+              name="isFido" 
+              control={control}
+              render={({ field }) => (
+                <Switch
+                  id="isFido"
+                  checked={field.value}
+                  onCheckedChange={field.onChange} 
+                />
+              )}
+            />
           </Field>
         </FieldGroup>
       </form>
