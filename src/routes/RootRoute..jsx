@@ -12,7 +12,7 @@ const RootRoute = () => (
           <Route
             key={id + index1}
             path={path}
-            element={<RouteComponent url={path} id={id} name={name} />}
+            element={<RouteComponent id={id}/>}
           />
         );
       }),
